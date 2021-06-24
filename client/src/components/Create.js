@@ -3,13 +3,14 @@ import { Link, navigate } from '@reach/router';
 import axios from 'axios';
 
 const Create = (props) => {
-    const [ name, setName ] = useState("");
-    const [ type, setType ] = useState("");
-    const [ description, setDescription ] = useState("");
-    const [ favorite, setFavorite ] = useState("");
-    const [ skills, setSkills ] = useState("");
+    
+    const [ name, setName ] = useState();
+    const [ type, setType ] = useState();
+    const [ description, setDescription ] = useState();
+    const [ favorite, setFavorite ] = useState();
+    const [ skills, setSkills ] = useState(0);
     const [ errs, setErrs ] = useState({});
-    const [ errors, setErrors ] = useState({});
+    
 
     const submitHandler = (e) => {
         e.preventDefault(); //bring in the event with 'e' and prevent default refresh
@@ -24,7 +25,7 @@ const Create = (props) => {
             .then((res) => {
                 if(res.data.errors) {
                     console.log(res.data.errors)
-                    setErrors(res.data.errors);
+                    setErrs(res.data.errors);
                 }
                 else {
                     console.log(res.data)
@@ -33,7 +34,6 @@ const Create = (props) => {
             })
             .catch((err) => {
                 console.log(err)
-                console.log(err.response.data.erros);
             })
     }
 
@@ -44,46 +44,44 @@ const Create = (props) => {
                 <div>
                     <label> Name: </label>
                     {
-                        errors.name ?
-                        <span className="error-text">{errors.name.message}</span>
-                        : null
+                        errs.name ?
+                            <span className="error-text">{errs.name.message}</span>
+                            : null
                     }
                     <input type="text"
                     name="name"
                     value={name}
                     onChange={ (e) => setName( e.target.value ) }
                     />
-                    {
-                        errs.name ?
-                            <span className="error-text">{errs.name.message}</span>
-                            : null
-                    }
+
+
                 </div>
                 <div>
                     <label> Type: </label>
-                    <input type="text"
-                    name="type"
-                    value={type}
-                    onChange={ (e) => setType( e.target.value ) }
-                    />
                     {
                         errs.type ?
                         <span className="error-text">{errs.type.message}</span>
                             : null
                     }
+                    <input type="text"
+                    name="type"
+                    value={type}
+                    onChange={ (e) => setType( e.target.value ) }
+                    />
                 </div>
                 <div>
                     <label> Description: </label>
-                    <input type="text"
-                    name="description"
-                    value={description}
-                    onChange={ (e) => setDescription( e.target.value ) }
-                    />
                     {
                         errs.description ?
                         <span className="error-text">{errs.description.message}</span>
                             : null
                     }
+                    <input type="text"
+                    name="description"
+                    value={description}
+                    onChange={ (e) => setDescription( e.target.value ) }
+                    />
+
                 </div>
                 <div>
                     <input type="checkbox"
@@ -95,17 +93,18 @@ const Create = (props) => {
                 </div>
                 <div>
                     <label> Skills: </label>
+                    {
+                        errs.skills ?
+                        <span className="error-text">{errs.skills.message}</span>
+                            : null
+                    }
                     <input type="number"
                     name="skills"
                     min="0"
                     value={skills}
                     onChange={ (e) => setSkills( e.target.value ) }
                     />
-                    {
-                        errs.year ?
-                        <span className="error-text">{errs.skills.message}</span>
-                            : null
-                    }
+
                 </div>
                 <div>
                 <button type="submit">Add Author</button>

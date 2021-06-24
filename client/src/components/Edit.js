@@ -106,7 +106,7 @@ const Edit = (props) => {
                     <label> Skills: </label>
                     <input type="number"
                     name="skills"
-                    min="10"
+                    min="0"
                     value={skills}
                     onChange={ (e) => setSkills( e.target.value ) }
                     />

@@ -1,8 +1,9 @@
 const Lit = require ('../models/lit.model')
 
 module.exports = {
+
     getAll: (req, res) => {  // the getAll is the key, the value is the entire anonymous object
-        Lit.find({}) //this is going to use the model connection to the db
+        Lit.find() //this is going to use the model connection to the db
                         // 'find' returns an array by default 
             .then((allLitAuthors) => {
                 console.log(allLitAuthors);
@@ -24,7 +25,7 @@ module.exports = {
             .catch((err) => {
                 console.log("error happened in the Create");
                 console.log(err);
-                res.status(400).json(err);
+                res.json(err);
             });
     },
 

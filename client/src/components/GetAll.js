@@ -34,7 +34,7 @@ const GetAll = (props) => {
                             </td>
                             <td>
                             <DeleteButton _id={ author._id }/>
-                            <Link to={ `/lit/${author._id}/edit`}><button>Edit</button></Link>
+                                <Link to={ `/lit/${author._id}/edit`}><button>Edit</button></Link>
                             </td>
                         </tr>
                         ))
